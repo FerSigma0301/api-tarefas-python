@@ -1,11 +1,14 @@
 from fastapi import FastAPI
 
+from app.database import Base, engine
 from app.routes.tasks import router as tasks_router
+
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="API de Tarefas",
-    version="0.1.0",
-    description="API REST para gerenciamento de tarefas.",
+    version="1.0.0",
+    description="API REST para gerenciamento de tarefas com FastAPI e SQLite.",
 )
 
 app.include_router(tasks_router)
